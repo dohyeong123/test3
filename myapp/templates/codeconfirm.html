@@ -1,0 +1,18 @@
+<div>
+    <p>{% if member.attend == True %}
+        {{member.member_name}}님을 퇴근처리합니다
+        {% else %}
+        {{member.member_name}}님을 출근처리합니다
+        {% endif %}
+    </p>
+    <p>개인코드를 맞게 입력해야만 출퇴근 처리가 가능합니다.</p>
+
+    <form method='POST' action="{% url 'changework' member.id %}">
+        {% csrf_token %}
+        개인코드 : <br>
+        <input type="text" name="confirmcode"><br>
+        <input type="submit" value="출퇴근변경"><br>
+
+    </form>
+    {{errormsg}}
+</div>

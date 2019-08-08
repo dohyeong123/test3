@@ -1,0 +1,14 @@
+<div>
+    <form action="{% url 'createmember' %}" method="POST">
+        
+        {% csrf_token %}
+
+        이름 : <br>
+        <input type="text" name="name">
+        <br>
+        개인코드 지정 : <br>
+        <input type="text" name="code">
+        <br>
+        <input type="submit" value="멤버 추가">
+    </form>
+</div>

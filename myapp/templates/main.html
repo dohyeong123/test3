@@ -1,0 +1,45 @@
+{% if user.is_authenticated %}
+
+<div>
+    <p>로그인이 되었습니다.</p>
+    <p> <a href="{% url 'create' %}">사원추가</a> <a href="javascript:{document.getElementById('logout').submit()}">로그아웃</a> </p>
+    
+    
+    <form action="{% url 'logout' %}" id="logout" method="POST" action="main.html">
+        {% csrf_token %}
+        <input type="text">
+    </form>
+</div>
+<div>
+    <table>
+        {% for member in members.all %}
+
+        <tr>
+            <td>{{member.member_name}}</td>
+            <td>
+                <a href="{% url 'codeconfirm' member.id %}">
+                {% if member.attend == True %}출근
+                {% else %}퇴근
+                {% endif %}
+                </a>
+            </td>
+            <td> <a href="{% url 'delete' member.id %}"> [x] </a> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+
+<div>
+    <form methode="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        Username : <br>
+        <input type="text" name="username">
+        <br>
+        Password : <br>
+        <input type="password" name="password"><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endif %}
